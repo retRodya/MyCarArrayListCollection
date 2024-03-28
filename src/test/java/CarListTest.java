@@ -21,6 +21,34 @@ class CarListTest {
     }
 
     @Test
+    void whenAdded2ElementBySameIndexThen1stAddedElementMustIncreaseIndexBy1() {
+        Car car1 = new Car("BMW", 1);
+        Car car2 = new Car("Lada", 2);
+        carList.add(car1, 15);
+        carList.add(car2, 15);
+        assertEquals(car1, carList.get(16));
+        assertEquals(car2, carList.get(15));
+    }
+    @Test
+    void whenAdded2ElementBySameIndexOnLastPlaceThen1stAddedElementMustIncreaseIndexBy1() {
+        Car car1 = new Car("BMW", 1);
+        Car car2 = new Car("Lada", 2);
+        carList.add(car1, 100);
+        carList.add(car2, 100);
+        assertEquals(car1, carList.get(101));
+        assertEquals(car2, carList.get(100));
+    }
+    @Test
+    void whenAdded2ElementBySameIndexOnFirstPlaceThen1stAddedElementMustIncreaseIndexBy1() {
+        Car car1 = new Car("BMW", 1);
+        Car car2 = new Car("Lada", 2);
+        carList.add(car1, 0);
+        carList.add(car2, 0);
+        assertEquals(car1, carList.get(1));
+        assertEquals(car2, carList.get(0));
+    }
+
+    @Test
     void when1ElementRemovedByIndexThenSizeMustBeDecreasedBy1() {
         assertTrue(carList.removeAt(5));
         assertEquals(99, carList.size());
