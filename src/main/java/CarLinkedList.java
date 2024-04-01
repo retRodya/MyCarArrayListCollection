@@ -106,6 +106,7 @@ public class CarLinkedList implements CarList {
             this.previous = previous;
             this.value = value;
             this.next = next;
+
         }
     }
 }
