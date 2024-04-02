@@ -9,7 +9,7 @@ class CarListTest {
 
     @BeforeEach
     void setUp() {
-        carList = new CarArrayList();
+        carList = new CarLinkedList();
         for (int i = 0; i < 100; i++) {
             carList.add(new Car("Brand" + i, i));
         }
@@ -28,6 +28,7 @@ class CarListTest {
         carList.add(car2, 15);
         assertEquals(car1, carList.get(16));
         assertEquals(car2, carList.get(15));
+        assertEquals(102, carList.size());
     }
     @Test
     void whenAdded2ElementBySameIndexOnLastPlaceThen1stAddedElementMustIncreaseIndexBy1() {

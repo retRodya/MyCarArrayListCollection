@@ -20,7 +20,7 @@ public class CarLinkedList implements CarList {
 
     @Override
     public Car get(int index) {
-        return null;
+        return getNode(index).value;
     }
 
     @Override
@@ -43,6 +43,7 @@ public class CarLinkedList implements CarList {
         }
         if (index == size) {
             add(car);
+//        }
         } else { // !!!!!!!!!!!!!!!!!!
             Node nodeNext = getNode(index);
             Node nodePrevious = nodeNext.previous;
@@ -50,7 +51,7 @@ public class CarLinkedList implements CarList {
             nodeNext.previous = newNode;
             if (nodePrevious != null) {
                 nodePrevious.next = newNode;
-            }else {
+            } else {
                 first = newNode;
             }
         }
@@ -59,9 +60,14 @@ public class CarLinkedList implements CarList {
 
     @Override
     public boolean remove(Car car) {
-        first = null;
-        last = null;
-        return true;
+        Node node = first;
+        for (int i = 0; i < size; i++) {
+            if (node.value.equals(car)) {
+                return removeAt(i);
+            }
+            node = node.next;
+            }
+        return false;
     }
 
     @Override
@@ -71,14 +77,14 @@ public class CarLinkedList implements CarList {
         Node nodeNext = node.next;
         if (nodeNext != null) {
             nodeNext.previous = nodePrevious;
+        } else {
+            last = nodePrevious;
         }
         if (nodePrevious != null) {
             nodePrevious.next = nodeNext;
         } else {
             first = nodeNext;
         }
-
-
         size--;
         return true;
     }
@@ -90,14 +96,19 @@ public class CarLinkedList implements CarList {
 
     @Override
     public void clear() {
-
+        first = null;
+        last = null;
+        size = 0;
     }
 
-    private Node getNode (int index) { //!!!!!!!!!!!! !!!!!!!!!!
+    private Node getNode(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
         Node node = first;
         for (int i = 0; i < index; i++) {
-           node =  node.next;
+            node = node.next;
         }
-       return node;
+        return node;
     }
 }
