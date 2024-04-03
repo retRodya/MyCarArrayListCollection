@@ -88,5 +88,6 @@ class CarListTest {
     void whenMethodGetReturnRightValue () {
         Car car = carList.get(0);
         assertEquals("Brand0", car.getBrand());
+
     }
 }
