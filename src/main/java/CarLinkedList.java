@@ -38,18 +38,21 @@ public class CarLinkedList implements CarList {
 
     @Override
     public void add(Car car, int index) {
-        Node node = getNode(index);
-        if (node.previous != null) {
-            Node previous = node.previous;
-
-            if (node.next != null) {
-                Node next = node.next;
-
-                node = new Node(previous, car, next);
-                previous.next = next.previous = node;
-            }
+        if (index <0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index == size) {
+            add(car);
         } else {
-
+            Node next = getNode(index);
+            Node previous = next.previous;
+            Node node = new Node(previous, car, next);
+            if (previous != null) {
+                previous.next = node;
+            } else {
+                first = node;
+            }
+            next.previous = node;
         }
         size++;
     }
@@ -58,30 +61,31 @@ public class CarLinkedList implements CarList {
     public boolean remove(Car car) {
         Node node = first;
         for (int i = 0; i < size; i++) {
-            if (node.value.equals(car)) {
-                removeAt(i);
-                size--;
-                return true;
+            if (car.equals(node.value)) {
+                return removeAt(i);
             }
+            node = node.next;
         }
         return false;
     }
 
     @Override
     public boolean removeAt(int index) {
-        if (index >= 0 && index < size) {
             Node node = getNode(index);
             Node previous = node.previous;
             Node next = node.next;
-
+            if (previous != null) {
             previous.next = next;
+            } else {
+                first = next;
+            }
+            if (next != null){
             next.previous = previous;
-
-            node.previous = node.next = null;
+            } else {
+                last = previous;
+            }
             size--;
             return true;
-        }
-        return false;
     }
 
     @Override
