@@ -32,6 +32,7 @@ public class CarLinkedList implements CarList {
             Node secondLast = last;
             last = new Node(secondLast, car, null);
             secondLast.next = last;
+
         }
         size++;
     }
