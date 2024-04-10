@@ -103,6 +103,7 @@ public class CarLinkedList implements CarList {
     Node getNode(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
+
         }
         Node node = first;
         for (int i = 0; i < index; i++) {
